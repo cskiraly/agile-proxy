@@ -1,0 +1,29 @@
+# https://caddyserver.com/docs/caddyfile
+0.0.0.0:80 {
+  root /home
+  gzip
+
+  proxy /ui/agile-nodered agile-nodered:1880 {
+    without /ui/agile-nodered
+  }
+
+  proxy /api/agile-core agile-core:8080 {
+    without /api/agile-core
+  }
+
+  proxy /api/agile-security agile-security:3000 {
+    without /api/agile-security
+  }
+
+  proxy /api/agile-data agile-data:1338 {
+    without /api/agile-data
+  }
+
+  proxy /ws agile-core:8080 {
+    websocket
+  }
+
+  proxy / agile-osjs:8000 {
+  }
+
+}
